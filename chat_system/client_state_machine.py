@@ -5,7 +5,7 @@ Created on Sun Apr  5 00:00:32 2015
 """
 from chat_utils import *
 import json
-from secure_messaging import Scmsg
+from secure_messaging_old import Scmsg
 # asdkjhds;ajhf;adhs
 
 class ClientSM:
@@ -29,9 +29,9 @@ class ClientSM:
         return self.me
 
     def connect_to(self, peer):
-        key=Scmsg().generate_key()
+        #key=Scmsg().generate_key()
         # {"action":"send_key","target":self.peer, "key":key} ))
-        msg = json.dumps({"action": "connect", "target": peer,"key":key})
+        #msg = json.dumps({"action": "connect", "target": peer,"key":key})
         mysend(self.s, msg)
         response = json.loads(myrecv(self.s))
         if response["status"] == "success":
@@ -184,7 +184,7 @@ class ClientSM:
                     # msg = peer_msg['message']
                     msg = Scmsg.decrypt_msg(peer_msg['message']) 
                     sender = peer_msg['from']
-                    # msg = Scmsg.decrypt_msg(peer_msg['message'])
+                    #msg = Scmsg.decrypt_msg(peer_msg['message'])
                     # sender = peer_msg['from']
                     self.out_msg += sender + msg
                     ###--ADD SECURE MESSAGING CODE HERE--###
